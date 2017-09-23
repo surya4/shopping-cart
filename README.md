@@ -1,4 +1,4 @@
-## Boilerplate for Node Projects
+## Shopping cart using Node
 
 ### Configuration
 - **Platform:** node
@@ -9,6 +9,3 @@
 - **JavaScript Framework**: 
 - **Build Tool**: none
 - **Unit Testing**: mocha
-- **Database**: mongodb
-- **Authentication**: email,facebook,google,twitter,github
-- **Deployment**: digitalOcean
