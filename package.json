@@ -1,7 +1,7 @@
 {
-  "name": "node-boilerplate",
+  "name": "shopping-cart",
   "version": "1.0.0",
-  "description": "Boilerplate for Node Projects",
+  "description": "Simple app using MySQL with KnexJS, ExpressJS, AngularJS and NodeJS",
   "main": "app.js",
   "directories": {
     "test": "tests",
@@ -23,7 +23,6 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
-    "bootstrap": "^3.3.7",
     "compression": "^1.7.0",
     "cookie-parser": "^1.4.3",
     "debug": "^3.0.1",
@@ -36,11 +35,6 @@
     "express-validation": "^1.0.2",
     "express-validator": "^4.0.0",
     "method-override": "^2.3.9",
-    "mongoose": "^4.11.8",
-    "morgan": "^1.8.2",
-    "passport": "^0.4.0",
-    "redis": "^2.8.0",
-    "request": "^2.81.0",
     "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
