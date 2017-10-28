@@ -1,0 +1,35 @@
+		<div class="container">
+			<div class="row">
+				<form>
+					<fieldset>
+						<legend>Cart List</legend>
+						<input type="text" placeholder="Type something…">
+					</fieldset>
+				</form>
+				<ul class="row">
+					<!-- list here -->
+					<li class="panel panel-default" ng-repeat="item in items | filter:searchStr">
+						<div class="panel-body">
+							<div class="col-md-2">
+								<img src="img/{{item.imgUrl}}">
+							</div>
+							<div class="col-md-8">
+								<h4>{{item.name}}</h4>
+								<p>{{item.price}}</p>
+								<ul>
+									<li>Rating: {{item.rating}}</li>
+									<li>Binding: {{item.binding | uppercase}}</li>
+									<li>Publisher: {{item.publisher}}</li>
+									<li>Released: {{item.releaseDate}}</li>
+								</ul>
+								<p>{{item.details}}</p>
+							</div>
+							<div class="col-md-2">
+								<button class="btn btn-default">Add to Cart</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
