@@ -1,4 +1,4 @@
-## Shopping cart using Node
+## Shopping cart using NodeJS, AngularJS and MYSQL
 
 ### Configuration
 - **Platform:** node
