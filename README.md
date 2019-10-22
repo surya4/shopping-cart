@@ -1,8 +1,8 @@
-## Shopping cart using NodeJS, and MySQL
+# Shopping cart using NodeJS and MySQL
 
-### Configuration
-- **Platform:** node
+## Configuration
+
+- **Platform:** node v12.11.1
 - **Framework**: express
 - **Database**: mysql with knex
-- **Build Tool**: none
 - **Unit Testing**: mocha
