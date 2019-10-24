@@ -72,6 +72,7 @@ const products_json = [
   {
     id: '{{index()}}',
     sku: '{{objectId()}}',
+    name: '{{firstName()}}',
     seller_id: '{{index()}}',
     warehouse_id: '{{index()}}',
     pictures: ['http://placehold.it/32x32','http://placehold.it/32x32','http://placehold.it/32x32' ],
