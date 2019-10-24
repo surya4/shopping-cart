@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "start": "node server"
+    "start": "node server",
+    "build": "echo 'build script executed'"
   },
   "repository": {
     "type": "git",
