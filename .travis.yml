@@ -1,19 +1,29 @@
-language: node_js
-node_js:
-  - 12.13.0
-cache: npm
+# language: node_js
+# node_js:
+#   - 12.13.0
+# cache: npm
 
-install:
-  - npm install
+# install:
+#   - npm install
+
+# script:
+#   - npm test
+#   - npm run build
+
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: $GITHUB_TOKEN
+#   local_dir: build
+#   on:
+#     branch: login-apis
+
+language: node_js
+node_js: 
+  - 12.13.0
+cache:
+  directories:
+    - "node_modules"
 
 script:
   - npm test
-  - npm run build
-
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local_dir: build
-  on:
-    branch: login-apis
