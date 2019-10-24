@@ -24,9 +24,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // routes
 const indexRoutes = require('./routes/index')
 app.use('/shop/v1/index', indexRoutes);
-
-const userRoutes = require('./routes/user')
+const userRoutes = require('./routes/users')
 app.use('/shop/v1/user', userRoutes);
+const productRoutes = require('./routes/products')
+app.use('/shop/v1/product', productRoutes);
+const orderRoutes = require('./routes/orders')
+app.use('/shop/v1/order', orderRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

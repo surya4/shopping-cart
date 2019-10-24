@@ -1,6 +1,6 @@
 const express  = require('express');
 const router  = express.Router();
-const userController = require('../controllers/user');
+const userController = require('../controllers/users');
 
 router.post('/register',  async (req, res) => {
   const response = await userController.test()
