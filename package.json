@@ -4,8 +4,9 @@
   "description": "Backend APIs for shopping cart app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "nyc mocha",
+    "start": "node server",
+    "build": "echo 'build script executed'"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,24 @@
   },
   "homepage": "https://github.com/surya4/shopping-cart#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "express-validator": "^6.2.0",
-    "nodemon": "^1.19.4"
+    "knex": "^0.19.5",
+    "lodash": "^4.17.15",
+    "mocha": "^6.2.2",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "nodemon": "^1.19.4",
+    "path": "^0.12.7",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "nyc": "^14.1.1"
   }
 }

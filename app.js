@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
-/* DB Connection starts */
-
-/* DB Connection Ends */
+// const SESS_LIFETIME = 1000 * 60 * 60;
+const SESS_LIFETIME = 1000 * 60 * 5;
 
 
 const app = express();
@@ -20,13 +20,30 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(
+  session({
+    // store,
+    name: 'sid',
+    saveUninitialized: false,
+    resave: false,
+    secret: process.env.SESSION_SECRET || 'sssssssssssssshkoihai',
+    cookie: {
+      maxAge: SESS_LIFETIME,
+      sameSite: true,
+      secure: process.env.NODE_ENV === 'production'
+    }
+  })
+);
 
 // routes
 const indexRoutes = require('./routes/index')
 app.use('/shop/v1/index', indexRoutes);
-
-const userRoutes = require('./routes/user')
+const userRoutes = require('./routes/users')
 app.use('/shop/v1/user', userRoutes);
+const productRoutes = require('./routes/products')
+app.use('/shop/v1/product', productRoutes);
+const orderRoutes = require('./routes/orders')
+app.use('/shop/v1/order', orderRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
