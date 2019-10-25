@@ -1,6 +1,10 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const userModel = require('../models/users');
 const {successResponse, errorResponse} = require('../lib/response');
-const { validateUserRegister, validateUserRole, validateUserPermission } = require('../validators/users');
+const { validateUserRegister, validateUserRole, validateUserPermission, 
+  validateAuth } = require('../validators/users');
 const { validateId } = require('../validators/common');
 
 const logStruct = (func, error) => {
@@ -10,8 +14,10 @@ const logStruct = (func, error) => {
 const createUser = async (reqData) => {
   try {
     const validInput = validateUserRegister(reqData);
+    validInput.password = bcrypt.hashSync(String(validInput.password), saltRounds);
     const response = await userModel.createUser(validInput);
-    return successResponse(200, response)
+    await userModel.createPermission(validInput);
+    return successResponse(200, response, { user_roles: ['customer'], email: response[0].email})
   } catch (error) {
     console.error('error -> ', logStruct('createUser', error))
     return errorResponse(error.status, error.message);
@@ -63,6 +69,21 @@ const createUserToken = async (reqData) => {
   }
 };
 
+const loginUser = async (reqData) => {
+  try {
+    const validInput = validateAuth(reqData);
+    const response = await userModel.getUserDetailsByNameOrEmail(validInput.user_name);
+    const matched = bcrypt.compareSync(String(validInput.password), response[0].password)
+    if (!matched) return errorResponse(401);
+    const role_response = await userModel.getUserPermission(response[0].id);
+    const user_roles = role_response.map(el => el.role);
+    return successResponse(200, response, {user_roles, email: response[0].email})
+  } catch (error) {
+    console.error('error -> ', logStruct('fetchUser', error))
+    return errorResponse(error.status, error.message);
+  }
+};
+
 
 module.exports = {
   createUser,
@@ -70,6 +91,7 @@ module.exports = {
   createUserPermission,
   createUserPermission,
   createUserRole,
-  createUserToken
+  createUserToken,
+  loginUser
 }
 

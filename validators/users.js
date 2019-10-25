@@ -6,7 +6,11 @@ const {successResponse, errorResponse} = require('../lib/response');
 exports.validateUserRegister = body => {
   const bodyStruct = {};
   const arr = ['name', 'email', 'phone', 'password', 'street', 'city', 'state',
-    'country', 'gender' ]
+    'country', 'gender' ];
+
+    if (!body.password || body.password.length < 4) {
+      throw errorResponse(401);
+    }
 
   arr.map((item) => {
     const check = body.hasOwnProperty(item);
@@ -51,6 +55,23 @@ exports.validateUserToken = body => {
     const check = body.hasOwnProperty(item);
     if (!check) throw errorResponse(400, item+' missing');
     bodyStruct[item] = body[item].trim()
+  });
+
+  return bodyStruct;
+};
+
+exports.validateAuth = body => {
+  const bodyStruct = {};
+  const arr = ['user_name', 'password' ];
+
+  if (!body.password || body.password.length < 4) {
+    throw errorResponse(401);
+  }
+
+  arr.map((item) => {
+    const check = body.hasOwnProperty(item);
+    if (!check) throw errorResponse(400, item+' missing');
+    bodyStruct[item] = body[item];
   });
 
   return bodyStruct;

@@ -15,6 +15,14 @@ exports.getDetailsById = async (id) => {
   return query;
 };
 
+exports.getUserDetailsByNameOrEmail = async (input) => {
+  const query = db.read.select('*')
+  .from('users')
+  .where('name', '=', input)
+  .orWhere('email', '=', input);
+  return query;
+};
+
 exports.createUser = async (data) => {
   const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
   const query = db.write('users').insert({
@@ -46,7 +54,7 @@ exports.createPermission = async (data) => {
   const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
   const query = db.write('user_permission').insert({
     user_id: data.user_id,
-    role_id: data.role_id,
+    role_id: data.role_id || 1,
     created_at: createdAt,
     updated_at: createdAt
   });
@@ -74,6 +82,15 @@ exports.createUserToken = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
+  console.log("query -->", query.toQuery())
+  return query;
+};
+
+exports.getUserPermission = async (user_id) => {
+  const query = db.read.select('user_role.role')
+  .from('user_permission')
+  .join('user_role', 'user_permission.role_id', '=', 'user_role.id')
+  .where('user_id', '=', user_id)
   console.log("query -->", query.toQuery())
   return query;
 };
