@@ -112,7 +112,6 @@ exports.getAllFromUsersCart = async (order_id) => {
 };
 
 exports.getAllFromUsersCurrentCart = async (user_id) => {
-  console.log("user_id  ->", user_id)
   const query = db.read.select('carts.*')
   .from('carts')
   .join('orders','orders.id','=','carts.order_id')
@@ -123,7 +122,6 @@ exports.getAllFromUsersCurrentCart = async (user_id) => {
 };
 
 exports.getItemFromUsersCurrentCart = async (user_id, product_id) => {
-  console.log("user_id  ->", user_id, product_id)
   const query = db.read.select('carts.*')
   .from('carts')
   .join('orders','orders.id','=','carts.order_id')
