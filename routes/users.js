@@ -11,7 +11,7 @@ router.post('/register',  async (req, res) => {
 });
 
 router.get('/user/:id',  async (req, res) => {
-  req.body.user_id = Number(req.params.id);
+  req.body.id = Number(req.params.id);
   const response = await userController.fetchUser(req.body)
   return res.status(response.status).send(response)
 });

@@ -10,6 +10,7 @@ exports.validateProductRegister = body => {
   arr.map((item) => {
     const check = body.hasOwnProperty(item);
     if (!check) throw errorResponse(400, item+' missing');
+    bodyStruct[item] = body[item];
   });
 
   return bodyStruct;
@@ -36,6 +37,7 @@ exports.validateSeller = body => {
   arr.map((item) => {
     const check = body.hasOwnProperty(item);
     if (!check) throw errorResponse(400, item+' missing');
+    bodyStruct[item] = body[item];
   });
 
   return bodyStruct;
@@ -49,6 +51,7 @@ exports.validateWarehouse = body => {
   arr.map((item) => {
     const check = body.hasOwnProperty(item);
     if (!check) throw errorResponse(400, item+' missing');
+    bodyStruct[item] = body[item];
   });
 
   return bodyStruct;

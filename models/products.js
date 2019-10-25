@@ -24,10 +24,51 @@ exports.createProduct = async (data) => {
     price: data.price || null,
     one_time_limit: data.one_time_limit || null,
     currency: data.currency || null,
+    available: data.available || 0,
     picture: data.picture || null,
     created_at: createdAt,
     updated_at: createdAt
   });
+  console.log("query -->", query.toQuery())
+  return query;
+};
+
+exports.updateProduct = async (data) => {
+  data.updated_at = moment().format('YYYY-MM-DD HH:mm:ss');
+  const toBeUpdated = {};
+  const canBeUpdated = ['name','description', 'seller_id', 'warehouse_id', 
+  'updated_at', 'quantity', 'price', 'currency', 'one_time_limit', 'picture'];
+  for (let i in data) {
+    if (canBeUpdated.indexOf(i) > -1) {
+      toBeUpdated[i] = data[i];
+    }
+  }
+  const query = db.write('products')
+    .where('id', data.id)
+    .update(toBeUpdated);
+
+  console.log("query -->", query.toQuery())
+  return query;
+};
+
+exports.removeProduct = async (id) => {
+  const query = db.write('products')
+    .where('id', id)
+    .update({
+      available: 0,
+      updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
+    });
+  console.log("query -->", query.toQuery())
+  return query;
+};
+
+exports.reAddProduct = async (id) => {
+  const query = db.write('products')
+    .where('id', id)
+    .update({
+      available: 1,
+      updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
+    });
   console.log("query -->", query.toQuery())
   return query;
 };
