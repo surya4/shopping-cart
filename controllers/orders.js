@@ -1,5 +1,5 @@
 const customResponse = require('../lib/response').customResponse;
-const { validateOrderRegister } = require('../validators/Orders');
+const { validateOrderRegister } = require('../validators/orders');
 
 const logStruct = (func, error) => {
   return {'func': func, 'file': 'orderController', error}

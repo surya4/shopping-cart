@@ -1,13 +1,13 @@
 const customResponse = require('../lib/response').customResponse;
-const { validateUserRegister } = require('../validators/users');
+const { validateProductRegister } = require('../validators/products');
 
 const logStruct = (func, error) => {
-  return {'func': func, 'file': 'producsController', error}
+  return {'func': func, 'file': 'productsController', error}
 }
 
 const createUser = async (reqData) => {
   try {
-    const userData = validateUserRegister(reqData);
+    const userData = validateProductRegister(reqData);
     // console.log("userData --> ", userData);
     return customResponse(true, 200, reqData)
   } catch (error) {
