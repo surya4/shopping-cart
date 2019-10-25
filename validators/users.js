@@ -1,23 +1,57 @@
 'use strict';
 
 
-const customResponse = require('../lib/response').customResponse;
+const {successResponse, errorResponse} = require('../lib/response');
 
 exports.validateUserRegister = body => {
   const bodyStruct = {};
+  const arr = ['name', 'email', 'phone', 'password', 'street', 'city', 'state',
+    'country', 'gender' ]
 
-  if (!body.name || !body.email || !body.password || !body.phone || !body.address || 
-    !body.city || !body.state || !body.country || !body.age || !body.gender) {
-    throw customResponse(false, 400)
-  }
+  arr.map((item) => {
+    const check = body.hasOwnProperty(item);
+    if (!check) throw errorResponse(400, item+' missing');
+    bodyStruct[item] = body[item].trim()
+  });
 
-  try {
-    Object.keys(body).map(k => bodyStruct[k] = body[k].trim());
-  } catch (error) {
-    throw customResponse(false, 400)
-  }
-
-  console.log("bodyStruct", bodyStruct)
- 
   return bodyStruct;
 };
+
+exports.validateUserPermission = body => {
+  const bodyStruct = {};
+  const arr = ['user_id', 'role_id' ]
+
+  arr.map((item) => {
+    const check = body.hasOwnProperty(item);
+    if (!check) throw errorResponse(400, item+' missing');
+  });
+
+  return bodyStruct;
+};
+
+exports.validateUserRole = body => {
+  const bodyStruct = {};
+  const arr = ['role' ]
+
+  arr.map((item) => {
+    const check = body.hasOwnProperty(item);
+    if (!check) throw errorResponse(400, item+' missing');
+    bodyStruct[item] = body[item].trim()
+  });
+
+  return bodyStruct;
+};
+
+exports.validateUserToken = body => {
+  const bodyStruct = {};
+  const arr = ['token', 'expiry' ]
+
+  arr.map((item) => {
+    const check = body.hasOwnProperty(item);
+    if (!check) throw errorResponse(400, item+' missing');
+    bodyStruct[item] = body[item].trim()
+  });
+
+  return bodyStruct;
+};
+

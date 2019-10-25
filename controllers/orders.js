@@ -1,4 +1,4 @@
-const customResponse = require('../lib/response').customResponse;
+const {successResponse, errorResponse} = require('../lib/response');
 const { validateOrderRegister } = require('../validators/orders');
 
 const logStruct = (func, error) => {
@@ -8,11 +8,10 @@ const logStruct = (func, error) => {
 const createOrder = async (reqData) => {
   try {
     const OrderData = validateOrderRegister(reqData);
-    // console.log("OrderData --> ", OrderData);
-    return customResponse(true, 200, OrderData)
+    return successResponse(200, OrderData)
   } catch (error) {
     console.error('error -> ', logStruct('createOrder', error))
-    return customResponse(false)
+    return errorResponse(error.status, error.message);
   }
 };
 

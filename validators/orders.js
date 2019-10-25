@@ -1,22 +1,16 @@
 'use strict';
 
 
-const customResponse = require('../lib/response').customResponse;
+const {successResponse, errorResponse} = require('../lib/response');
 
 exports.validateOrderRegister = body => {
   const bodyStruct = {};
+  const arr = ['product_id', 'user_id', 'quantity', 'sub_total', 'stage']
 
-  if (!body.product_id || !body.user_id || !body.quantity || !body.sub_total || !body.stage) {
-    throw customResponse(false, 400)
-  }
+  arr.map((item) => {
+    const check = body.hasOwnProperty(item);
+    if (!check) throw errorResponse(400, item+' missing');
+  });
 
-  try {
-    Object.keys(body).map(k => bodyStruct[k] = body[k].trim());
-  } catch (error) {
-    throw customResponse(false, 400)
-  }
-
-  console.log("bodyStruct", bodyStruct)
- 
   return bodyStruct;
 };
