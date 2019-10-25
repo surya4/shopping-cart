@@ -122,7 +122,6 @@ const warehouse_json = [
     city: '{{city()}}',
     state: '{{state()}}',
     country: '{{country()}}',
-    description: '{{lorem(1, "paragraphs")}}',
     latitude: '{{floating(-90.000001, 90)}}',
     longitude: '{{floating(-180.000001, 180)}}',
     updated_at: '{{date(new Date(2019, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss Z")}}',
