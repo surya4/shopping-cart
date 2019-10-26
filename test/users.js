@@ -30,7 +30,7 @@ describe('Users', () => {
       "latitude": 65.155827,
       "longitude": -160.861496
     };
-    it('create new user', (done) => {
+    it('should create new user', (done) => {
       let new_user1 = Object.assign({}, user);
       new_user1.email = Math.floor(Math.random() * 10000) + new_user1.email;
 
@@ -51,7 +51,7 @@ describe('Users', () => {
       })
     })
 
-    it('check for duplicate entry', (done) => {
+    it('should check for duplicate entry', (done) => {
       let new_user2 = Object.assign({}, user);
       chai.request(app).post('/shop/v1/user/register')
       .send(new_user2)
@@ -66,7 +66,7 @@ describe('Users', () => {
       })
     })
 
-    it('check for small password', (done) => {
+    it('should check for small password', (done) => {
       let new_user3 = Object.assign({}, user);
       new_user3.password = "abc"
       chai.request(app).post('/shop/v1/user/register')
@@ -82,7 +82,7 @@ describe('Users', () => {
       })
     })
 
-    it('check for param missing', (done) => {
+    it('should check for param missing', (done) => {
       let new_user4 = Object.assign({}, user);
       delete new_user4.name;
       chai.request(app).post('/shop/v1/user/register')
@@ -98,7 +98,7 @@ describe('Users', () => {
       })
     })
 
-    it('check for invalid email', (done) => {
+    it('should check for invalid email', (done) => {
       let new_user5 = Object.assign({}, user);
       new_user5.email = "abcd";
       chai.request(app).post('/shop/v1/user/register')
@@ -114,7 +114,7 @@ describe('Users', () => {
       })
     })
 
-    it('check for invalid phone', (done) => {
+    it('should check for invalid phone', (done) => {
       let new_user6 = Object.assign({}, user);
       new_user6.phone = "abcd";
       chai.request(app).post('/shop/v1/user/register')
@@ -136,7 +136,7 @@ describe('Users', () => {
       "user_name": "john4@wick.com",
       "password": "abcd",
     };
-    it('sucess when user logges in', (done) => {
+    it('should sucess when user logges in', (done) => {
       let new_user1 = Object.assign({}, user);
       chai.request(app).post('/shop/v1/user/login')
       .send(new_user1)
@@ -157,12 +157,12 @@ describe('Users', () => {
         expect(res.body.meta.email).to.exist;
         expect(res.body.meta.user_roles.length).not.to.be.equal(0);
 
-        customerCookie = res.headers['set-cookie'].pop().split(';')[0];
+        customerCookie = res.headers['set-cookie'].pop().split('should ;')[0];
         done()
       })
     })
 
-    it('login failure for missing field', (done) => {
+    it('should login failure for missing field', (done) => {
       let new_user2 = Object.assign({}, user);
       delete new_user2.user_name;
       chai.request(app).post('/shop/v1/user/login')
@@ -178,7 +178,7 @@ describe('Users', () => {
       })
     })
 
-    it('login failure for wrong password', (done) => {
+    it('should login failure for wrong password', (done) => {
       let new_user3 = Object.assign({}, user);
       new_user3.password = "password";
       chai.request(app).post('/shop/v1/user/login')
@@ -199,7 +199,7 @@ describe('Users', () => {
     const agent1 =  chai.request(app);
     const agent2 =  chai.request(app);
 
-    it('get user by id', (done) => {
+    it('should get user by id', (done) => {
       const userId = 25;
       agent1.get(`/shop/v1/user/fetch/${userId}`)
       .set('Cookie', customerCookie)
@@ -219,7 +219,7 @@ describe('Users', () => {
       })
     })
 
-    it('check for param missing', (done) => {
+    it('should check for param missing', (done) => {
       let userId = "abcd";
       agent2.get(`/shop/v1/user/fetch/${userId}`)
       .set('Cookie', customerCookie)
@@ -239,17 +239,17 @@ describe('Users', () => {
     const agent3 =  chai.request(app);
     const agent4 =  chai.request(app);
 
-    it('sucess when admin user logges in', (done) => {
+    it('should get sucess when admin user logges in', (done) => {
       agent3.post('/shop/v1/user/login')
       .send({ user_name: "martinezprince@terrasys.com", password: "abcd"})
       .end((err, res) => {
         expect(err).not.to.exist;
-        adminCookie = res.headers['set-cookie'].pop().split(';')[0];
+        adminCookie = res.headers['set-cookie'].pop().split('should ;')[0];
         done()
       })
     })
 
-    it('create new permission', (done) => {
+    it('should create new permission', (done) => {
       agent4.post('/shop/v1/user/permission')
       .set('Cookie', adminCookie)
       .send({user_id: 1, role_id: 1})
@@ -268,7 +268,7 @@ describe('Users', () => {
   })
 
   describe('create role', () => {
-    it('create new role', (done) => {
+    it('should create new role', (done) => {
       const agent5 =  chai.request(app);
       agent5.post('/shop/v1/user/role')
       .set('Cookie', adminCookie)
@@ -311,7 +311,7 @@ describe('Users', () => {
     };
     user.email = Math.floor(Math.random() * 10000) + user.email;
 
-    it('create new seller', (done) => {
+    it('should create new seller', (done) => {
       chai.request(app).post('/shop/v1/user/seller')
       .send(user)
       .end((err, res) => {
@@ -327,7 +327,7 @@ describe('Users', () => {
       })
     })
 
-    it('seller account exists', (done) => {
+    it('should check if seller account exists', (done) => {
       chai.request(app).post('/shop/v1/user/seller')
       .send(user)
       .end((err, res) => {
