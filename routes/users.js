@@ -62,7 +62,7 @@ router.post('/role', authenticator, allowAdmin, async (req, res) => {
   return res.status(response.status).send(response)
 });
 
-router.post('/seller', authenticator, async (req, res) => {
+router.post('/seller', async (req, res) => {
   const response = await userController.createSeller(req.body)
   return res.status(response.status).send(response)
 })

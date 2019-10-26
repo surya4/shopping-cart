@@ -126,3 +126,10 @@ exports.createSeller = async (data) => {
   console.info("query -->", query.toQuery())
   return query;
 };
+
+exports.getSellerDetailsByUserId = async (user_id) => {
+  const query = db.read.select('*')
+  .from('seller')
+  .where('user_id', '=', user_id);;
+  return query;
+};

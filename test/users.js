@@ -287,4 +287,59 @@ describe('Users', () => {
     })
   })
 
+  describe('create seller', () => {
+    let user = {
+      "picture": "http://placehold.it/32x32",
+      "logo": "http://placehold.it/32x32",
+      "age": 20,
+      "name": "JOhn Seller",
+      "gender": "male",
+      "email": "john-seller@wick.com",
+      "password": "abcd",
+      "phone": "+971555555555",
+      "street": "209 Balfour Place, Linwood, Arizona, 9647",
+      "city": "Kersey",
+      "state": "Virginia",
+      "country": "Viet Nam",
+      "about_me": "Elit anim laborum ut aliqua cupidatat Lorem eu eu proident sint cillum minim reprehenderit. Velit et et velit nostrud anim. Esse sint id quis laborum labore ut sunt exercitation labore eu mollit dolore. Nisi anim do pariatur quis duis labore deserunt minim incididunt.\r\n",
+      "about_us": "Elit anim laborum ut aliqua cupidatat Lorem eu eu proident sint cillum mi",
+      "verified_email": 0,
+      "verified": 1,
+      "verified_phone": 1,
+      "latitude": 65.155827,
+      "longitude": -160.861496
+    };
+    user.email = Math.floor(Math.random() * 10000) + user.email;
+
+    it('create new seller', (done) => {
+      chai.request(app).post('/shop/v1/user/seller')
+      .send(user)
+      .end((err, res) => {
+        expect(err).not.to.exist;
+        expect(res).to.have.status(201);
+        expect(res.body.message).to.be.equal('created');
+        expect(res.body.success).to.be.equal(true);
+        expect(res.body.data).to.exist;
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data.length).to.be.equal(1);
+        expect(res.body.data[0]).to.be.a('number');
+        done()
+      })
+    })
+
+    it('seller account exists', (done) => {
+      chai.request(app).post('/shop/v1/user/seller')
+      .send(user)
+      .end((err, res) => {
+        expect(err).not.to.exist;
+        expect(res).to.have.status(400);
+        expect(res.body.message).to.be.equal('existingSeller');
+        expect(res.body.success).to.be.equal(false);
+        expect(res.body.data).not.to.exist;
+        expect(res.body.meta).not.to.exist;
+        done()
+      })
+    })
+
+  })
 });

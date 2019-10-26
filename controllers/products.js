@@ -1,7 +1,7 @@
 const prodModel = require('../models/products');
 const {successResponse, errorResponse} = require('../lib/response');
-const { validateProductRegister, validateSeller, validateWarehouse, 
-  validateProductCategory } = require('../validators/products');
+const { validateProductRegister, validateProductCategory } = 
+require('../validators/products');
 const { validateId } = require('../validators/common');
 
 const logStruct = (func, error) => {
@@ -74,30 +74,6 @@ const fetchProd = async (reqData) => {
   }
 };
 
-// const fetchUser = async (reqData) => {
-//   try {
-//     const validInput = validateUserRegister(reqData);
-//     const userData = await userModel.getDetailsById(validInput.user_id);
-//     console.log("userData --> ", userData);
-//     return successResponse(200, userData)
-//   } catch (error) {
-//     console.error('error -> ', logStruct('fetchUser', error))
-//     return errorResponse(error.status, error.message);
-//   }
-// };
-
-// const fetchUser = async (reqData) => {
-//   try {
-//     const validInput = validateUserRegister(reqData);
-//     const userData = await userModel.getDetailsById(validInput.user_id);
-//     console.log("userData --> ", userData);
-//     return successResponse(200, userData)
-//   } catch (error) {
-//     console.error('error -> ', logStruct('fetchUser', error))
-//     return errorResponse(error.status, error.message);
-//   }
-// };
-
 module.exports = {
   createProduct, 
   updateProduct,
@@ -105,6 +81,4 @@ module.exports = {
   removeProduct,
   fetchProd,
   createProductCategory,
-  createSeller,
-  createWarehouse
 }

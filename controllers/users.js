@@ -14,8 +14,8 @@ const logStruct = (func, error) => {
 const createUser = async (reqData) => {
   try {
     const validInput = validateUserRegister(reqData);
-    const checkIfUserExists = await userModel.getUserDetailsByEmail(validInput.email);
-    if (checkIfUserExists && checkIfUserExists.length) {
+    const userExists = await userModel.getUserDetailsByEmail(validInput.email);
+    if (userExists && userExists.length) {
       return errorResponse(403, 'userExists');
     }
     validInput.password = bcrypt.hashSync(String(validInput.password), saltRounds);
@@ -92,8 +92,22 @@ const loginUser = async (reqData) => {
 const createSeller = async (reqData) => {
   try {
     const validInput = validateSeller(reqData);
-    const prodData = await userModel.createSeller(validInput);
-    return successResponse(200, prodData)
+    const userExists = await userModel.getUserDetailsByEmail(validInput.email);
+
+    if (!userExists || !userExists.length) {
+      validInput.password = bcrypt.hashSync(String(validInput.password), saltRounds);
+      newUser = await userModel.createUser(validInput);
+      validInput.user_id = newUser[0]
+    } else {
+      sellerExists = await userModel.getSellerDetailsByUserId(userExists[0].id);
+      if (sellerExists && sellerExists.length) {
+        return errorResponse(400, 'existingSeller');
+      }
+      validInput.user_id = userExists[0].id;
+    }
+
+    const response = await userModel.createSeller(validInput);
+    return successResponse(201, response, null, 'created')
   } catch (error) {
     console.error('error -> ', logStruct('createSeller', error))
     return errorResponse(error.status, error.message);

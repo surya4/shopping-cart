@@ -88,7 +88,7 @@ exports.validateAuth = body => {
 
 exports.validateSeller = body => {
   const bodyStruct = {};
-  const arr = ['user_id', 'about_us', 'logo', 'name', 'verified', 'email', 'phone', 'street',  'city', 'state',
+  const arr = [ 'about_us', 'logo', 'name', 'verified', 'email', 'phone', 'street',  'city', 'state',
   'country' ];
 
   arr.map((item) => {
