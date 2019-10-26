@@ -1,12 +1,11 @@
 'use strict';
 
+require('dotenv').config();
 const http = require('http');
-const dotenv = require('dotenv');
 const port = process.env.SRV_PORT || '3000';
 
 const app = require('./app');
 
-dotenv.config();
 app.set('port', port);
 
 const server = http.createServer(app)

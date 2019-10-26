@@ -4,3 +4,4 @@ node_modules
 *.env
 package-lock.json
 .nyc_output/
+lib/db_script.js

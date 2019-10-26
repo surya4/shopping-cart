@@ -104,8 +104,6 @@ const removeFromCart = async (reqData) => {
     const validInput = validateOrderRegister(reqData);
     const product = await orderModel.getItemFromUsersCurrentCart(validInput.user_id, validInput.product_id);
 
-    console.log("product --->", product);
-
     const cartPayload = {
       id: product[0].id, 
       quantity: product[0].quantity - validInput.quantity > 0 ? product[0].quantity - validInput.quantity : 0 ,

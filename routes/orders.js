@@ -4,6 +4,7 @@ const router  = express.Router();
 const ordersController = require('../controllers/orders');
 const {authenticator, allowCustomer, 
   allowAdmin, allowSeller} = require('../lib/common');
+  
 // orders
 router.post('/order', authenticator, async (req, res) => {
   const response = await ordersController.createOrder(req.body)

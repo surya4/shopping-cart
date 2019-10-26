@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-// const SESS_LIFETIME = 1000 * 60 * 60;
+// const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000 * 60 * 5;
 const SESS_LIFETIME = 1000 * 60 * 5;
 
 
@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   session({
-    // store,
     name: 'sid',
     saveUninitialized: false,
     resave: false,
@@ -46,7 +45,7 @@ const orderRoutes = require('./routes/orders')
 app.use('/shop/v1/order', orderRoutes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send({
     success : false,
     message : 'notFound',
@@ -58,7 +57,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   if(err && err.status==520){
     return next();
   }
