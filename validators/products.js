@@ -26,5 +26,7 @@ exports.validateProductCategory = body => {
     bodyStruct[item] = body[item].trim()
   });
 
+  console.log("body", bodyStruct)
+
   return bodyStruct;
 };
