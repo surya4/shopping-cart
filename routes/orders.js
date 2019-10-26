@@ -64,5 +64,12 @@ router.put('/ship/:id', authenticator, async (req, res) => {
   req.body.id = Number(req.params.id);
   const response = await ordersController.updateUserShipment(req.body)
   return res.status(response.status).send(response)
+});
+
+// warehouse
+router.post('/warehouse', authenticator, allowAdmin, async (req, res) => {
+  const response = await ordersController.createWarehouse(req.body)
+  return res.status(response.status).send(response)
 })
+
 module.exports = router;

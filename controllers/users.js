@@ -4,7 +4,7 @@ const saltRounds = 10;
 const userModel = require('../models/users');
 const {successResponse, errorResponse} = require('../lib/response');
 const { validateUserRegister, validateUserRole, validateUserPermission, 
-  validateAuth } = require('../validators/users');
+  validateAuth, validateSeller } = require('../validators/users');
 const { validateId } = require('../validators/common');
 
 const logStruct = (func, error) => {
@@ -89,6 +89,16 @@ const loginUser = async (reqData) => {
   }
 };
 
+const createSeller = async (reqData) => {
+  try {
+    const validInput = validateSeller(reqData);
+    const prodData = await userModel.createSeller(validInput);
+    return successResponse(200, prodData)
+  } catch (error) {
+    console.error('error -> ', logStruct('createSeller', error))
+    return errorResponse(error.status, error.message);
+  }
+};
 
 module.exports = {
   createUser,
@@ -97,6 +107,7 @@ module.exports = {
   createUserPermission,
   createUserRole,
   createUserToken,
-  loginUser
+  loginUser,
+  createSeller
 }
 

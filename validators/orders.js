@@ -28,3 +28,17 @@ exports.validateShipRegister = body => {
 
   return bodyStruct;
 };
+
+exports.validateWarehouse = body => {
+  const bodyStruct = {};
+  const arr = ['seller_id', 'pictures', 'about_us', 'verified', 'email', 'phone', 'street',  'city', 'state',
+  'country' ]
+
+  arr.map((item) => {
+    const check = body.hasOwnProperty(item);
+    if (!check) throw errorResponse(400, item+'Missing');
+    bodyStruct[item] = body[item];
+  });
+
+  return bodyStruct;
+};

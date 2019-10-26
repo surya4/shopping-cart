@@ -17,7 +17,7 @@ exports.fetchNewOrder = async (user_id) => {
   .from('orders')
   .where('user_id', '=', user_id)
   .where('new', '=', 1);
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -27,10 +27,9 @@ exports.fetchExistingProductFromCart = async (data) => {
   .where('product_id', '=', data.product_id)
   .where('order_id', '=', data.order_id)
   .limit(1);
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
-
 
 exports.createOrder = async (data) => {
   const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -42,7 +41,7 @@ exports.createOrder = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -55,7 +54,7 @@ exports.updateOrder = async (data) => {
   })
   .where('id', '=', data.id)
   .where('new', '=', 1);
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -66,7 +65,7 @@ exports.closeOrder = async (id) => {
     updated_at: createdAt
   })
   .where('id', '=', id);
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -82,7 +81,7 @@ exports.addToCart = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -100,7 +99,7 @@ exports.updateCart = async (data) => {
     .where('id', data.id)
     .update(toBeUpdated);
 
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -152,7 +151,7 @@ exports.createShipment = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -170,7 +169,7 @@ exports.updateShipment = async (data) => {
     .where('id', data.id)
     .update(toBeUpdated);
 
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -178,5 +177,26 @@ exports.getAllFromShipmentById = async (id) => {
   const query = db.read.select('*')
   .from('shipment')
   .where('id', '=', id);
+  return query;
+};
+
+exports.createWarehouse = async (data) => {
+  const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
+  const query = db.write('warehouse').insert({
+    seller_id: data.seller_id || null,
+    name: data.name || null,
+    about_us: data.about_us || null,
+    email: data.email || null,
+    phone: data.phone || null,
+    street: data.street || null,
+    city: data.city || null,
+    zipcode: data.zipcode || null,
+    state: data.state || null,
+    country: data.country || null,
+    pictures: data.pictures || null,
+    created_at: createdAt,
+    updated_at: createdAt
+  });
+  console.info("query -->", query.toQuery())
   return query;
 };

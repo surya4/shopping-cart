@@ -1,6 +1,6 @@
 const orderModel = require('../models/orders');
 const {successResponse, errorResponse} = require('../lib/response');
-const { validateOrderRegister, validateShipRegister } = require('../validators/orders');
+const { validateOrderRegister, validateShipRegister, validateWarehouse } = require('../validators/orders');
 const { validateId } = require('../validators/common');
 
 const logStruct = (func, error) => {
@@ -167,6 +167,17 @@ const updateUserShipment = async (reqData) => {
   }
 };
 
+const createWarehouse = async (reqData) => {
+  try {
+    const validInput = validateWarehouse(reqData);
+    const prodData = await orderModel.createWarehouse(validInput);
+    return successResponse(200, prodData)
+  } catch (error) {
+    console.error('error -> ', logStruct('createWarehouse', error))
+    return errorResponse(error.status, error.message);
+  }
+};
+
 // db scripts
 // const dbScripts = require('../lib/db_script')
 
@@ -180,5 +191,6 @@ module.exports = {
   createShipment,
   fetchUserShipment,
   updateUserShipment,
-  fetchActiveCartByUser
+  fetchActiveCartByUser,
+  createWarehouse
 }

@@ -52,7 +52,7 @@ exports.createUser = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -65,7 +65,7 @@ exports.createPermission = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -76,7 +76,7 @@ exports.createUserRole = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -89,7 +89,7 @@ exports.createUserToken = async (data) => {
     created_at: createdAt,
     updated_at: createdAt
   });
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
   return query;
 };
 
@@ -98,6 +98,31 @@ exports.getUserPermission = async (user_id) => {
   .from('user_permission')
   .join('user_role', 'user_permission.role_id', '=', 'user_role.id')
   .where('user_id', '=', user_id)
-  console.log("query -->", query.toQuery())
+  console.info("query -->", query.toQuery())
+  return query;
+};
+
+exports.createSeller = async (data) => {
+  const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
+  const query = db.write('seller').insert({
+    user_id: data.user_id || null,
+    name: data.name || null,
+    about_us: data.about_us || null,
+    email: data.email || null,
+    phone: data.phone || null,
+    verified_phone: data.verified_phone || 0,
+    verified_email: data.verified_email || 0,
+    verified_account: data.verified_account || 0,
+    DOB: data.DOB || null,
+    street: data.street || null,
+    city: data.city || null,
+    zipcode: data.zipcode || null,
+    state: data.state || null,
+    country: data.country || null,
+    logo: data.logo || null,
+    created_at: createdAt,
+    updated_at: createdAt
+  });
+  console.info("query -->", query.toQuery())
   return query;
 };

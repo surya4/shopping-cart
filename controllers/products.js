@@ -63,28 +63,6 @@ const reAddProduct = async (reqData) => {
   }
 };
 
-const createSeller = async (reqData) => {
-  try {
-    const validInput = validateSeller(reqData);
-    const prodData = await prodModel.createSeller(validInput);
-    return successResponse(200, prodData)
-  } catch (error) {
-    console.error('error -> ', logStruct('createSeller', error))
-    return errorResponse(error.status, error.message);
-  }
-};
-
-const createWarehouse = async (reqData) => {
-  try {
-    const validInput = validateWarehouse(reqData);
-    const prodData = await prodModel.createWarehouse(validInput);
-    return successResponse(200, prodData)
-  } catch (error) {
-    console.error('error -> ', logStruct('createWarehouse', error))
-    return errorResponse(error.status, error.message);
-  }
-};
-
 const fetchProd = async (reqData) => {
   try {
     const validInput = validateId(reqData);
