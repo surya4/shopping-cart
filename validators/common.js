@@ -8,7 +8,7 @@ exports.validateId = body => {
 
   arr.map((item) => {
     const check = body.hasOwnProperty(item);
-    if (!check) throw errorResponse(400, item+' missing');
+    if (!check) throw errorResponse(400, item+'Missing');
   });
 
   return body;

@@ -14,10 +14,14 @@ const logStruct = (func, error) => {
 const createUser = async (reqData) => {
   try {
     const validInput = validateUserRegister(reqData);
+    const checkIfUserExists = await userModel.getUserDetailsByEmail(validInput.email);
+    if (checkIfUserExists && checkIfUserExists.length) {
+      return errorResponse(403, 'userExists');
+    }
     validInput.password = bcrypt.hashSync(String(validInput.password), saltRounds);
     const response = await userModel.createUser(validInput);
     await userModel.createPermission(validInput);
-    return successResponse(200, response, { user_roles: ['customer'], email: response[0].email})
+    return successResponse(201, response, { user_roles: ['customer'], email: validInput.email}, 'userRegistered')
   } catch (error) {
     console.error('error -> ', logStruct('createUser', error))
     return errorResponse(error.status, error.message);
@@ -28,7 +32,7 @@ const createUserPermission = async (reqData) => {
   try {
     const validInput = validateUserPermission(reqData);
     const response = await userModel.createPermission(validInput);
-    return successResponse(200, response)
+    return successResponse(201, response)
   } catch (error) {
     console.error('error -> ', logStruct('createUserPermission', error))
     return errorResponse(error.status, error.message);
@@ -39,7 +43,7 @@ const createUserRole = async (reqData) => {
   try {
     const validInput = validateUserRole(reqData);
     const response = await userModel.createUserRole(validInput);
-    return successResponse(200, response)
+    return successResponse(201, response)
   } catch (error) {
     console.error('error -> ', logStruct('createUserRole', error))
     return errorResponse(error.status, error.message);

@@ -3,6 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
+require('dotenv').config();
+
 // const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000 * 60 * 5;
 const SESS_LIFETIME = 1000 * 60 * 5;
 

@@ -15,6 +15,13 @@ exports.getDetailsById = async (id) => {
   return query;
 };
 
+exports.getUserDetailsByEmail = async (email) => {
+  const query = db.read.select('*')
+  .from('users')
+  .where('email', '=', email);
+  return query;
+};
+
 exports.getUserDetailsByNameOrEmail = async (input) => {
   const query = db.read.select('*')
   .from('users')
