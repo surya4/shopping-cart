@@ -1,4 +1,5 @@
 const envConfig = require('../knexfile').envConfig;
+console.info("db envConfig -->", envConfig)
 
 const knex_read_config = envConfig;
 const knex_write_config = envConfig;
