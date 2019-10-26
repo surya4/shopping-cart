@@ -5,8 +5,8 @@ const session = require('express-session');
 
 require('dotenv').config();
 
-// const SESS_LIFETIME = process.env.SESS_LIFETIME || 1000 * 60 * 5;
-const SESS_LIFETIME = 1000 * 60 * 5;
+const SESS_LIFETIME = parseInt(process.env.SESS_LIFETIME) || 1000 * 60 * 60;
+// const SESS_LIFETIME = 1000 * 60 * 5;
 
 
 const app = express();

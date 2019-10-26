@@ -20,7 +20,7 @@ const createUser = async (reqData) => {
     }
     validInput.password = bcrypt.hashSync(String(validInput.password), saltRounds);
     const response = await userModel.createUser(validInput);
-    await userModel.createPermission(validInput);
+    await userModel.createPermission({user_id: response[0]});
     return successResponse(201, response, { user_roles: ['customer'], email: validInput.email}, 'userRegistered')
   } catch (error) {
     console.error('error -> ', logStruct('createUser', error))
@@ -51,6 +51,7 @@ const createUserRole = async (reqData) => {
 };
 
 const fetchUser = async (reqData) => {
+  console.log("here2")
   try {
     const validInput = validateId(reqData);
     const response = await userModel.getDetailsById(validInput.id);

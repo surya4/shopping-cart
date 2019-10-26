@@ -19,7 +19,7 @@ router.post('/register',  async (req, res) => {
   return res.status(response.status).send(response)
 });
 
-router.get('/user/:id', authenticator, async (req, res) => {
+router.get('/fetch/:id', authenticator, async (req, res) => {
   req.body.id = Number(req.params.id);
   const response = await userController.fetchUser(req.body)
   return res.status(response.status).send(response)
