@@ -11,7 +11,7 @@ const createOrder = async (reqData) => {
   try {
     const validInput = validateOrderRegister(reqData);
     const response = await orderModel.createOrder(validInput);
-    return successResponse(200, response)
+    return successResponse(201, response, null, 'created')
   } catch (error) {
     console.error('error -> ', logStruct('createOrder', error))
     return errorResponse(error.status, error.message);
@@ -33,7 +33,7 @@ const updateOrder = async (reqData) => {
   try {
     const validInput = validateId(reqData);
     const response = await orderModel.updateOrder(validInput);
-    return successResponse(200, response)
+    return successResponse(201, null, null, 'updated')
   } catch (error) {
     console.error('error -> ', logStruct('updateOrder', error))
     return errorResponse(error.status, error.message);
@@ -127,7 +127,7 @@ const removeFromCart = async (reqData) => {
 
     await orderModel.updateOrder(orderPayload);
 
-    return successResponse(200, response)
+    return successResponse(204, response, null, 'removed')
   } catch (error) {
     console.error('error -> ', logStruct('removeFromCart', error))
     return errorResponse(error.status, error.message);
@@ -138,7 +138,7 @@ const createShipment = async (reqData) => {
   try {
     const validInput = validateShipRegister(reqData);
     const response = await orderModel.createShipment(validInput);
-    return successResponse(200, response)
+    return successResponse(201, response, null, 'created')
   } catch (error) {
     console.error('error -> ', logStruct('createShipment', error))
     return errorResponse(error.status, error.message);
@@ -160,7 +160,7 @@ const updateUserShipment = async (reqData) => {
   try {
     const validInput = validateId(reqData);
     const response = await orderModel.updateShipment(validInput);
-    return successResponse(200, response)
+    return successResponse(204, response, null, 'updated')
   } catch (error) {
     console.error('error -> ', logStruct('updateUserShipment', error))
     return errorResponse(error.status, error.message);
@@ -170,8 +170,9 @@ const updateUserShipment = async (reqData) => {
 const createWarehouse = async (reqData) => {
   try {
     const validInput = validateWarehouse(reqData);
-    const prodData = await orderModel.createWarehouse(validInput);
-    return successResponse(200, prodData)
+    console.log("input -->", validInput)
+    const response = await orderModel.createWarehouse(validInput);
+    return successResponse(201, response, null, 'created')
   } catch (error) {
     console.error('error -> ', logStruct('createWarehouse', error))
     return errorResponse(error.status, error.message);
