@@ -15,7 +15,7 @@ router.post('/add', authenticator, allowSeller, async (req, res) => {
   return res.status(response.status).send(response)
 })
 
-router.get('/get/:id', async (req, res) => {
+router.get('/fetch/:id', async (req, res) => {
   req.body.id = Number(req.params.id);
   const response = await prodController.fetchProd(req.body)
   return res.status(response.status).send(response)
@@ -23,19 +23,19 @@ router.get('/get/:id', async (req, res) => {
 
 router.put('/update/:id', authenticator, allowSeller, async (req, res) => {
   req.body.id = Number(req.params.id);
-  const response = await prodController.updateProduct(req.body)
+  const response = await prodController.updateProduct(req.body);
   return res.status(response.status).send(response)
 })
 
-router.post('/remove/:id', authenticator, allowSeller, async (req, res) => {
+router.delete('/item/:id', authenticator, allowSeller, async (req, res) => {
   req.body.id = Number(req.params.id);
   const response = await prodController.removeProduct(req.body)
   return res.status(response.status).send(response)
 })
 
-router.post('/readd/:id', authenticator, allowSeller, async (req, res) => {
+router.put('/readd/:id', authenticator, allowSeller, async (req, res) => {
   req.body.id = Number(req.params.id);
-  const response = await prodController.reAddProduct(req.body)
+  const response = await prodController.reAddProduct(req.body);
   return res.status(response.status).send(response)
 });
 
