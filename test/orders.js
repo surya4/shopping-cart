@@ -131,10 +131,7 @@ describe('Orders', () => {
       .send({'status': 'delivered' })
       .end((err, res) => {
         expect(err).not.to.exist;
-        expect(res).to.have.status(201);
-        expect(res.body.message).to.be.equal('updated');
-        expect(res.body.success).to.be.equal(true);
-        expect(res.body.data).not.to.exist;
+        expect(res).to.have.status(204);
         done()
       })
     });
@@ -147,16 +144,11 @@ describe('Orders', () => {
       .send({'quantity': 3 })
       .end((err, res) => {
         expect(err).not.to.exist;
-        expect(res).to.have.status(201);
-        expect(res.body.message).to.be.equal('updated');
-        expect(res.body.success).to.be.equal(true);
-        expect(res.body.data).not.to.exist;
-        expect(res.body.meta).not.to.exist;
+        expect(res).to.have.status(204);
         done()
       })
     });
 
-    // same prd update case, obj rmpty
     it('should update shipment details', (done) => {
       const agent7 = chai.request(app);
       const shipId = 1;
@@ -164,20 +156,12 @@ describe('Orders', () => {
       .set('Cookie', customerCookie)
       .send({'tracking_id': 1234 })
       .end((err, res) => {
-        console.log("prrr", err, res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(204);
-        expect(res.body.message).to.be.equal('updated');
-        expect(res.body.success).to.be.equal(true);
-        expect(res.body.data).to.exist;
-        expect(res.body.data).to.be.an('array');
-        expect(res.body.data.length).to.be.equal(1);
-        expect(res.body.data[0]).to.be.a('number');
         done()
       })
     });
   })
-
 
   describe('fetch items', () => {
     // seller login
@@ -197,19 +181,14 @@ describe('Orders', () => {
       const id = 1;
       agent9.get(`/shop/v1/order/order/${id}`)
       .set('Cookie', customerCookie)
-      // .send(item1)
       .end((err, res) => {
-
-        console.log("order45", res.body)
-
         expect(res).to.have.status(200);
-        expect(res.body.message).to.be.equal('created');
+        expect(res.body.message).to.be.equal('success');
         expect(res.body.success).to.be.equal(true);
         expect(res.body.data).to.exist;
         expect(res.body.data).to.be.an('array');
         expect(res.body.data.length).to.be.equal(1);
-        expect(res.body.data[0]).to.be.a('number');
-         expect(res.body.data[0]).to.have.all.keys('id','user_id','quantity','sub_total',
+        expect(res.body.data[0]).to.have.all.keys('id','user_id','quantity','sub_total',
         'created_at','updated_at','new');
         done()
       })
@@ -217,91 +196,115 @@ describe('Orders', () => {
 
     it('should get shipment details', (done) => {
       const agent10 = chai.request(app);
-      // let item1 = Object.assign({}, item);
       const id = 1;
       agent10.get(`/shop/v1/order/ship/${id}`)
       .set('Cookie', customerCookie)
       .end((err, res) => {
         expect(err).not.to.exist;
-        expect(res).to.have.status(201);
-        expect(res.body.message).to.be.equal('created');
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.be.equal('success');
         expect(res.body.success).to.be.equal(true);
         expect(res.body.data).to.exist;
         expect(res.body.data).to.be.an('array');
         expect(res.body.data.length).to.be.equal(1);
-        expect(res.body.data[0]).to.be.a('number');
+        expect(res.body.data[0]).to.have.all.keys('id','user_id', 'order_id', 'carier_company',
+        'carier_id', 'tracking_id', 'status', 'created_at', 'updated_at')
         done()
       })
     });
   })
 
-  // // check later
-  // describe('orders cruds', () => {
-  //   it('should re-add an old item', (done) => {
-  //     const agent6 = chai.request(app);
-  //     agent6.put(`/shop/v1/order/readd/${1}`)
-  //     .set('Cookie', sellerCookie)
-  //     .end((err, res) => {
-  //       expect(err).not.to.exist;
-  //       // expect(res).to.have.status(204);
-  //       // expect(res.body.message).to.be.equal('readded');
-  //       // expect(res.body.success).to.be.equal(true);
-  //       // expect(res.body.data).not.to.exist;
-  //       // expect(res.body.meta).not.to.exist;
-  //       done()
-  //     })
-  //   });
+  describe('Cart items', () => {
+    // seller login
+    it('should sucess when user logges in', (done) => {
+      const agent11 = chai.request(app);
+      agent11.post('/shop/v1/user/login')
+      .send({ user_name: "martinezprince@terrasys.com", password: "abcd"})
+      .end((err, res) => {
+        expect(err).not.to.exist;
+        customerCookie = res.headers['set-cookie'].pop().split('should ;')[0];
+        done()
+      })
+    })
+    
+    it('should add items to cart', (done) => {
+      const agent12 = chai.request(app);
+      agent12.post(`/shop/v1/order/addToCart`)
+      .set('Cookie', customerCookie)
+      .send({product_id: 1, user_id: 2, quantity: 1, sub_total:2, stage: 'cart'    
+    })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.be.equal('success');
+        expect(res.body.success).to.be.equal(true);
+        expect(res.body.data).not.to.exist;
+        done()
+      })
+    });
 
-  //   it('should remove an exsiting item', (done) => {
-  //     const agent7 = chai.request(app);
-  //     agent7.delete(`/shop/v1/order/item/${1}`)
-  //     .set('Cookie', sellerCookie)
-  //     .end((err, res) => {
-  //       expect(err).not.to.exist;
-  //       // expect(res).to.have.status(204);
-  //       // expect(res.body.message).to.be.equal('removed');
-  //       // expect(res.body.success).to.be.equal(true);
-  //       // expect(res.body.data).not.to.exist;
-  //       // expect(res.body.meta).not.to.exist;
-  //       done()
-  //     })
-  //   });
- 
-  //   it('should update an item details', (done) => {
-  //     const agent8 = chai.request(app);
-  //     agent8.put(`/shop/v1/order/update/${1}`)
-  //     .set('Cookie', sellerCookie)
-  //     .send({name: "new name"})
-  //     .end((err, res) => {
-  //       expect(err).not.to.exist;
-  //       // expect(res).to.have.status(204);
-  //       // expect(res.body.message).to.be.equal('updated');
-  //       // expect(res.body.success).to.be.equal(true);
-  //       // expect(res.body.data).not.to.exist;
-  //       // expect(res.body.meta).not.to.exist;
-  //       done()
-  //     })
-  //   });
+    it('should get all details of current active cart', (done) => {
+      const agent13 = chai.request(app);
+      const userId = 2;
+      agent13.get(`/shop/v1/order/activeCart/${userId}`)
+      .set('Cookie', customerCookie)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.be.equal('success');
+        expect(res.body.success).to.be.equal(true);
+        expect(res.body.data).to.exist;
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data.length).to.be.equal(1);
+        expect(res.body.data[0]).to.have.all.keys('id','user_id','product_id', 'stage', 'quantity','order_id',
+        'sub_total', 'created_at','updated_at');
+        done()
+      })
+    });
 
-  //   it('should fetch item details', (done) => {
-  //     const agent9 = chai.request(app);
-  //     agent9.get(`/shop/v1/order/fetch/${1}`)
-  //     .set('Cookie', sellerCookie)
-  //     .end((err, res) => {
-  //       expect(err).not.to.exist;
-  //       expect(res).to.have.status(200);
-  //       expect(res.body.message).to.be.equal('success');
-  //       expect(res.body.success).to.be.equal(true);
-  //       expect(res.body.data).to.exist;
-  //       expect(res.body.meta).not.to.exist;
-  //       expect(res.body.data).to.be.an('array');
-  //       expect(res.body.data[0]).to.exist;
-  //       expect(res.body.data[0]).to.have.all.keys('id','sku','name','seller_id',
-  //       'created_at','warehouse_id','picture','price','one_time_limit','currency',
-  //       'available','description','updated_at', 'quantity');
-  //       done()
-  //     })
-  //   });
-  // // })
-  // })
+    it('should get empty for users non active cart', (done) => {
+      const agent13 = chai.request(app);
+      const userId = 1;
+      agent13.get(`/shop/v1/order/activeCart/${userId}`)
+      .set('Cookie', customerCookie)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.be.equal('success');
+        expect(res.body.success).to.be.equal(true);
+        expect(res.body.data).to.exist;
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data.length).to.be.equal(0);
+        done()
+      })
+    });
+
+    it('should get cart details', (done) => {
+      const agent14 = chai.request(app);
+      const id = 1;
+      agent14.get(`/shop/v1/order/cart/${id}`)
+      .set('Cookie', customerCookie)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.message).to.be.equal('success');
+        expect(res.body.success).to.be.equal(true);
+        expect(res.body.data).to.exist;
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data.length).to.be.equal(1);
+        expect(res.body.data[0]).to.have.all.keys('id','user_id','product_id', 'stage', 'quantity','order_id',
+        'sub_total', 'created_at','updated_at');
+        done()
+      })
+    });
+
+    it('should remove item from cart', (done) => {
+      const agent10 = chai.request(app);
+      agent10.delete('/shop/v1/order/removeFromCart')
+      .set('Cookie', customerCookie)
+      .send({product_id: 1, user_id: 2, quantity: 1, sub_total:2, stage: 'cart'    
+      })
+      .end((err, res) => {
+        expect(err).not.to.exist;
+        expect(res).to.have.status(204);
+        done()
+      })
+    });
+  })
 })

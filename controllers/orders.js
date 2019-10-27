@@ -33,7 +33,7 @@ const updateOrder = async (reqData) => {
   try {
     const validInput = validateId(reqData);
     const response = await orderModel.updateOrder(validInput);
-    return successResponse(201, null, null, 'updated')
+    return successResponse(204, null, null, 'updated')
   } catch (error) {
     console.error('error -> ', logStruct('updateOrder', error))
     return errorResponse(error.status, error.message);
@@ -70,7 +70,7 @@ const addToCart = async (reqData) => {
       sub_total: newOrder[0].sub_total + validInput.sub_total,
     });
 
-    return successResponse(200, response)
+    return successResponse(200, null)
   } catch (error) {
     console.error('error -> ', logStruct('addToCart', error))
     return errorResponse(error.status, error.message);
@@ -102,7 +102,15 @@ const fetchUserCart = async (reqData) => {
 const removeFromCart = async (reqData) => {
   try {
     const validInput = validateOrderRegister(reqData);
+    // console.log("remove from cart input", validInput)
+
     const product = await orderModel.getItemFromUsersCurrentCart(validInput.user_id, validInput.product_id);
+
+    // console.log("remove from cart product", product)
+
+    if (!product || !product.length) {
+      return errorResponse(520, "noItemInCart");
+    }
 
     const cartPayload = {
       id: product[0].id, 
@@ -117,7 +125,8 @@ const removeFromCart = async (reqData) => {
     }
 
     const order = await orderModel.fetchOrderById(product[0].order_id);
-    console.log("order --->", order);
+
+    // console.log("remove from cart order", order)
 
     const orderPayload = {
       id: order[0].id, 
@@ -127,7 +136,7 @@ const removeFromCart = async (reqData) => {
 
     await orderModel.updateOrder(orderPayload);
 
-    return successResponse(204, response, null, 'removed')
+    return successResponse(204)
   } catch (error) {
     console.error('error -> ', logStruct('removeFromCart', error))
     return errorResponse(error.status, error.message);
@@ -170,7 +179,6 @@ const updateUserShipment = async (reqData) => {
 const createWarehouse = async (reqData) => {
   try {
     const validInput = validateWarehouse(reqData);
-    console.log("input -->", validInput)
     const response = await orderModel.createWarehouse(validInput);
     return successResponse(201, response, null, 'created')
   } catch (error) {

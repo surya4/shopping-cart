@@ -8,6 +8,11 @@ require('dotenv').config();
 const SESS_LIFETIME = parseInt(process.env.SESS_LIFETIME) || 1000 * 60 * 60;
 // const SESS_LIFETIME = 1000 * 60 * 5;
 
+const DEBUG = process.env.DEBUG || false;
+if(!DEBUG){
+  console.info = () => {}
+}
+
 
 const app = express();
 
