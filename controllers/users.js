@@ -51,7 +51,6 @@ const createUserRole = async (reqData) => {
 };
 
 const fetchUser = async (reqData) => {
-  console.log("here2")
   try {
     const validInput = validateId(reqData);
     const response = await userModel.getDetailsById(validInput.id);

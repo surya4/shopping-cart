@@ -120,11 +120,7 @@ describe('Products', () => {
       .set('Cookie', sellerCookie)
       .end((err, res) => {
         expect(err).not.to.exist;
-        // expect(res).to.have.status(204);
-        // expect(res.body.message).to.be.equal('readded');
-        // expect(res.body.success).to.be.equal(true);
-        // expect(res.body.data).not.to.exist;
-        // expect(res.body.meta).not.to.exist;
+        expect(res).to.have.status(204);
         done()
       })
     });
@@ -135,11 +131,7 @@ describe('Products', () => {
       .set('Cookie', sellerCookie)
       .end((err, res) => {
         expect(err).not.to.exist;
-        // expect(res).to.have.status(204);
-        // expect(res.body.message).to.be.equal('removed');
-        // expect(res.body.success).to.be.equal(true);
-        // expect(res.body.data).not.to.exist;
-        // expect(res.body.meta).not.to.exist;
+        expect(res).to.have.status(204);
         done()
       })
     });
@@ -151,11 +143,7 @@ describe('Products', () => {
       .send({name: "new name"})
       .end((err, res) => {
         expect(err).not.to.exist;
-        // expect(res).to.have.status(204);
-        // expect(res.body.message).to.be.equal('updated');
-        // expect(res.body.success).to.be.equal(true);
-        // expect(res.body.data).not.to.exist;
-        // expect(res.body.meta).not.to.exist;
+        expect(res).to.have.status(204);
         done()
       })
     });
