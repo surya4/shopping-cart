@@ -4,7 +4,7 @@
   "description": "Backend APIs for shopping cart app",
   "main": "server.js",
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha --exit",
     "start": "node server",
     "build": "echo 'build script executed'"
   },
