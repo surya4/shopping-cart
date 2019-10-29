@@ -61,18 +61,6 @@ const fetchUser = async (reqData) => {
   }
 };
 
-// to-do
-const createUserToken = async (reqData) => {
-  try {
-    const validInput = validateUserToken(reqData);
-    const response = await userModel.createUserToken(validInput);
-    return successResponse(200, response)
-  } catch (error) {
-    console.error('error -> ', logStruct('createUserToken', error))
-    return errorResponse(error.status, error.message);
-  }
-};
-
 const loginUser = async (reqData) => {
   try {
     const validInput = validateAuth(reqData);
@@ -119,7 +107,6 @@ module.exports = {
   createUserPermission,
   createUserPermission,
   createUserRole,
-  createUserToken,
   loginUser,
   createSeller
 }

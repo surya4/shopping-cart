@@ -1,13 +1,12 @@
 const user_json = [
   {
-    "id": 0,
     "picture": "http://placehold.it/32x32",
     "age": 20,
     "name": "Martinez Prince",
     "gender": "male",
     "email": "martinezprince@terrasys.com",
-    "password": "5db1bebdc22559dbbfff2b3b",
-    "phone": "+971 (828) 509-2892",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "209 Balfour Place, Linwood, Arizona, 9647",
     "city": "Kersey",
     "state": "Virginia",
@@ -19,14 +18,13 @@ const user_json = [
     "longitude": -160.861496
   },
   {
-    "id": 1,
     "picture": "http://placehold.it/32x32",
     "age": 37,
     "name": "Elma Luna",
     "gender": "female",
     "email": "elmaluna@terrasys.com",
-    "password": "5db1bebd229d2f867e5f52d2",
-    "phone": "+971 (928) 422-2668",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "276 Jodie Court, Stockwell, Alabama, 1948",
     "city": "Allentown",
     "state": "New Jersey",
@@ -38,14 +36,13 @@ const user_json = [
     "longitude": 21.39951,
   },
   {
-    "id": 2,
     "picture": "http://placehold.it/32x32",
     "age": 36,
     "name": "Dionne Forbes",
     "gender": "female",
     "email": "dionneforbes@terrasys.com",
-    "password": "5db1bebda9c1943b85a243d0",
-    "phone": "+971 (924) 439-2231",
+    "password": "1234",
+    "phone": "+971123456789",
     "street": "887 Lincoln Road, Hatteras, Delaware, 2651",
     "city": "Faywood",
     "state": "Nebraska",
@@ -57,33 +54,31 @@ const user_json = [
     "longitude": -27.096124,
   },
   {
-    "id": 3,
     "picture": "http://placehold.it/32x32",
     "age": 36,
     "name": "Stuart Vega",
     "gender": "male",
     "email": "stuartvega@terrasys.com",
-    "password": "5db1bebdfbb38fd6b8051cd5",
-    "phone": "+971 (806) 457-2109",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "568 Amersfort Place, Tooleville, Oregon, 560",
     "city": "Woodruff",
     "state": "Maryland",
     "country": "Mauritania",
     "about_me": "Non pariatur laboris commodo eu deserunt excepteur sint magna do. Est sint tempor nostrud in sit minim labore dolor laborum culpa. Reprehenderit amet mollit tempor ullamco eu officia ea ut. Id veniam aliqua laborum mollit voluptate officia cillum eiusmod deserunt qui sunt dolor. Mollit commodo exercitation voluptate eiusmod qui ipsum ea in Lorem incididunt do cillum.\r\n",
     "verified_email": 0,
-    "verified_phone": 0,
+    "verified_phone": 1,
     "latitude": -71.6082,
     "longitude": -92.866695,
   },
   {
-    "id": 4,
     "picture": "http://placehold.it/32x32",
     "age": 20,
     "name": "Padilla Lopez",
     "gender": "male",
     "email": "padillalopez@terrasys.com",
-    "password": "5db1bebdac142bb486a837f2",
-    "phone": "+971 (816) 499-3200",
+    "password": "1234",
+    "phone": "+971123456789",
     "street": "161 Crescent Street, Blandburg, Utah, 5343",
     "city": "Navarre",
     "state": "New Hampshire",
@@ -95,14 +90,13 @@ const user_json = [
     "longitude": 91.286743
   },
   {
-    "id": 5,
     "picture": "http://placehold.it/32x32",
     "age": 34,
     "name": "Houston Bradley",
     "gender": "male",
     "email": "houstonbradley@terrasys.com",
-    "password": "5db1bebdb28a9246853aa4f3",
-    "phone": "+971 (829) 491-2073",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "709 Village Road, Omar, Texas, 2569",
     "city": "Cassel",
     "state": "North Carolina",
@@ -114,14 +108,13 @@ const user_json = [
     "longitude": 144.786783
   },
   {
-    "id": 6,
     "picture": "http://placehold.it/32x32",
     "age": 36,
     "name": "Arline Ruiz",
     "gender": "female",
     "email": "arlineruiz@terrasys.com",
-    "password": "5db1bebd3a186170af5c38c6",
-    "phone": "+971 (938) 523-2876",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "722 Neptune Court, Cresaptown, Michigan, 4426",
     "city": "Castleton",
     "state": "Maine",
@@ -133,14 +126,13 @@ const user_json = [
     "longitude": 85.679123
   },
   {
-    "id": 7,
     "picture": "http://placehold.it/32x32",
     "age": 24,
     "name": "Vinson Morgan",
     "gender": "male",
     "email": "vinsonmorgan@terrasys.com",
-    "password": "5db1bebdd0eb0779ba3d708a",
-    "phone": "+971 (956) 579-3843",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "840 Rockwell Place, Cartwright, Northern Mariana Islands, 566",
     "city": "Greenbackville",
     "state": "Mississippi",
@@ -152,14 +144,13 @@ const user_json = [
     "longitude": -51.402433
   },
   {
-    "id": 8,
     "picture": "http://placehold.it/32x32",
     "age": 30,
     "name": "Gutierrez Bates",
     "gender": "male",
     "email": "gutierrezbates@terrasys.com",
-    "password": "5db1bebdab78afad3ecbe04f",
-    "phone": "+971 (993) 463-3993",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "202 Clinton Street, Sexton, Georgia, 9150",
     "city": "Shaft",
     "state": "Iowa",
@@ -171,14 +162,13 @@ const user_json = [
     "longitude": -141.323717
   },
   {
-    "id": 9,
     "picture": "http://placehold.it/32x32",
     "age": 38,
     "name": "Kirby Mcdaniel",
     "gender": "male",
     "email": "kirbymcdaniel@terrasys.com",
-    "password": "5db1bebdfa1cd4c508a60048",
-    "phone": "+971 (880) 448-2293",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "184 Celeste Court, Saddlebrooke, Massachusetts, 3197",
     "city": "Bath",
     "state": "Virgin Islands",
@@ -190,14 +180,13 @@ const user_json = [
     "longitude": 47.425999
   },
   {
-    "id": 10,
     "picture": "http://placehold.it/32x32",
     "age": 24,
     "name": "Barnett Pacheco",
     "gender": "male",
     "email": "barnettpacheco@terrasys.com",
-    "password": "5db1bebd5614f9f4f53236d4",
-    "phone": "+971 (932) 492-3051",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "770 Bergen Avenue, Bagtown, Alaska, 4657",
     "city": "Biehle",
     "state": "Minnesota",
@@ -209,14 +198,13 @@ const user_json = [
     "longitude": 100.034604
   },
   {
-    "id": 11,
     "picture": "http://placehold.it/32x32",
     "age": 21,
     "name": "Nanette Gallagher",
     "gender": "female",
     "email": "nanettegallagher@terrasys.com",
-    "password": "5db1bebd9f9c464da2afd88e",
-    "phone": "+971 (831) 580-3134",
+    "password": "1234",
+    "phone": "+971123456789",
     "street": "319 Dahlgreen Place, Tonopah, West Virginia, 1427",
     "city": "Buxton",
     "state": "Idaho",
@@ -228,14 +216,13 @@ const user_json = [
     "longitude": 168.131452
   },
   {
-    "id": 12,
     "picture": "http://placehold.it/32x32",
     "age": 22,
     "name": "Sonia Rocha",
     "gender": "female",
     "email": "soniarocha@terrasys.com",
-    "password": "5db1bebd0c9a3fab3a006a31",
-    "phone": "+971 (873) 415-2331",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "274 Throop Avenue, Lisco, Kentucky, 7191",
     "city": "Lewis",
     "state": "Nevada",
@@ -247,14 +234,13 @@ const user_json = [
     "longitude": 100.668575
   },
   {
-    "id": 13,
     "picture": "http://placehold.it/32x32",
     "age": 23,
     "name": "Gretchen Mcpherson",
     "gender": "female",
     "email": "gretchenmcpherson@terrasys.com",
-    "password": "5db1bebdb19af07ff8e5f9ab",
-    "phone": "+971 (837) 570-3836",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "438 Fillmore Place, Clay, Arkansas, 4894",
     "city": "Dellview",
     "state": "District Of Columbia",
@@ -266,14 +252,13 @@ const user_json = [
     "longitude": -57.749619
   },
   {
-    "id": 14,
     "picture": "http://placehold.it/32x32",
     "age": 23,
     "name": "Short Mcbride",
     "gender": "male",
     "email": "shortmcbride@terrasys.com",
-    "password": "5db1bebda9ef3cb64060741a",
-    "phone": "+971 (800) 555-3193",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "419 Dooley Street, Trona, Louisiana, 7874",
     "city": "Maplewood",
     "state": "Indiana",
@@ -285,14 +270,13 @@ const user_json = [
     "longitude": -124.550251
   },
   {
-    "id": 15,
     "picture": "http://placehold.it/32x32",
     "age": 39,
     "name": "Abbott Cash",
     "gender": "male",
     "email": "abbottcash@terrasys.com",
-    "password": "5db1bebd2f234c9a36659cd8",
-    "phone": "+971 (905) 430-2110",
+    "password": "abcd",
+    "phone": "+971123456789",
     "street": "296 Ellery Street, Slovan, Guam, 6792",
     "city": "Tedrow",
     "state": "Palau",
@@ -308,8 +292,8 @@ const user_json = [
 const user_permission_json = [
   {
     "id": 0,
-    "user_id": 0,
-    "role_id": 0
+    "user_id": 7,
+    "role_id": 3
   },
   {
     "id": 1,
@@ -358,43 +342,8 @@ const user_role_json = [
   }
 ];
 
-const invalidate_token_json = [
-  {
-    "id": 0,
-    "token": 0,
-    "expires_in": "2019-04-08T11:25:43 -04:00"
-  },
-  {
-    "id": 1,
-    "token": 1,
-    "expires_in": "2019-10-08T11:38:42 -04:00"
-  },
-  {
-    "id": 2,
-    "token": 2,
-    "expires_in": "2019-04-03T10:44:45 -04:00",
-    "updated_at": "2019-06-04T01:08:07 -04:00",
-    "created_at": "2019-05-15T05:03:07 -04:00"
-  },
-  {
-    "id": 3,
-    "token": 3,
-    "expires_in": "2019-10-10T04:24:01 -04:00",
-    "updated_at": "2019-04-16T04:15:26 -04:00",
-    "created_at": "2019-06-22T01:30:13 -04:00"
-  },
-  {
-    "id": 4,
-    "token": 4,
-    "expires_in": "2019-03-16T04:31:16 -04:00",
-    "updated_at": "2019-08-27T01:57:49 -04:00",
-    "created_at": "2019-09-30T06:29:58 -04:00"
-  }
-];
-
 module.exports = {
   user_json,
   user_permission_json,
-  user_role_json,
-  invalidate_token_json
+  user_role_json
 }

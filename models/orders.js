@@ -143,7 +143,7 @@ exports.createShipment = async (data) => {
   const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
   const query = db.write('shipment').insert({
     user_id: data.user_id,
-    order_id: data.user_id,
+    order_id: data.order_id,
     carier_company: data.carier_company,
     carier_id: data.carier_id,
     status: data.status,

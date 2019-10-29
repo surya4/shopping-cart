@@ -24,7 +24,6 @@ exports.createProduct = async (data) => {
     price: data.price || null,
     one_time_limit: data.one_time_limit || null,
     currency: data.currency || null,
-    available: data.available || 0,
     picture: data.picture || null,
     created_at: createdAt,
     updated_at: createdAt

@@ -1,4 +1,4 @@
-exports.envConfig = {
+const development = {
   client: 'mysql',
   connection: {
     host : process.env.DB_HOST,
@@ -10,4 +10,8 @@ exports.envConfig = {
     max: (process.env.DB_MAX_POOL)?parseInt(process.env.DB_MAX_POOL):50,
     min: 1
   },
-};
+}
+
+console.log("abra config", development)
+
+exports.development = development;
