@@ -46,7 +46,7 @@ const addToCart = async (reqData) => {
     let newOrder = await orderModel.fetchNewOrder(validInput.user_id);
 
     if (!newOrder || !newOrder.length) {
-      const response = await orderModel.createOrder(validInput);
+      await orderModel.createOrder(validInput);
       newOrder = await orderModel.fetchNewOrder(validInput.user_id);
     }
 
@@ -60,6 +60,7 @@ const addToCart = async (reqData) => {
         sub_total: validInput.sub_total + existing[0].sub_total
       });
     } else {
+      validInput.stage = 'cart';
       response = await orderModel.addToCart(validInput);
     }
 

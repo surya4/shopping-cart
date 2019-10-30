@@ -71,7 +71,9 @@ exports.closeOrder = async (id) => {
 
 exports.addToCart = async (data) => {
   const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
-  const query = db.write('carts').insert({
+  
+  const query = db.write('carts')
+  .insert({
     product_id: data.product_id,
     user_id: data.user_id,
     quantity: data.quantity,
@@ -95,6 +97,9 @@ exports.updateCart = async (data) => {
       toBeUpdated[i] = data[i];
     }
   }
+
+  console.log("update to cart model", data, toBeUpdated)
+
   const query = db.write('carts')
     .where('id', data.id)
     .update(toBeUpdated);
@@ -132,6 +137,7 @@ exports.getItemFromUsersCurrentCart = async (user_id, product_id) => {
 };
 
 exports.deleteFromCart = async (id) => {
+  console.log("del to cart model", id)
   const query = db.write('carts')
   .from('carts')
   .where('id', '=', id)

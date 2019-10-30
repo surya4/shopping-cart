@@ -11,6 +11,7 @@ exports.up = function (knex) {
       table.integer('price').unsigned()
       table.integer('one_time_limit').unsigned()
       table.string('currency');
+      table.tinyint('available');
       table.mediumtext('description').collate('utf8mb4_unicode_ci');
       table.timestamps();
     })

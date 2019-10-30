@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 const userModel = require('../models/users');
@@ -66,9 +66,14 @@ const loginUser = async (reqData) => {
     const validInput = validateAuth(reqData);
     const response = await userModel.getUserDetailsByNameOrEmail(validInput.user_name);
     const matched = bcrypt.compareSync(String(validInput.password), response[0].password)
-    if (!matched) return errorResponse(401);
+    if (!matched) {
+      return errorResponse(401, 'wrongPassword');
+    } else {
+    } 
+
     const role_response = await userModel.getUserPermission(response[0].id);
     const user_roles = role_response.map(el => el.role);
+    const p = successResponse(200, response, {user_roles, email: response[0].email});
     return successResponse(200, response, {user_roles, email: response[0].email})
   } catch (error) {
     console.error('error -> ', logStruct('fetchUser', error))
