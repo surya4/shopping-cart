@@ -1,7 +1,6 @@
 node_modules
 .vscode/
 .DS_Store
-*.env
 package-lock.json
 .nyc_output/
 lib/db_script.js

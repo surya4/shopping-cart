@@ -13,7 +13,8 @@
 
 **Check DB Schema design** - (public/db-design.pdf)
 
-**Code coverage**:
+**Code coverage** -
+
 ![alt text](/public/test-coverage.png)
 
 APIs are divided in three types
