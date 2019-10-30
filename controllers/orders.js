@@ -1,6 +1,6 @@
 const orderModel = require('../models/orders');
 const {successResponse, errorResponse} = require('../lib/response');
-const { validateOrderRegister, validateShipRegister } = require('../validators/orders');
+const { validateOrderRegister, validateShipRegister, validateWarehouse } = require('../validators/orders');
 const { validateId } = require('../validators/common');
 
 const logStruct = (func, error) => {
@@ -11,7 +11,7 @@ const createOrder = async (reqData) => {
   try {
     const validInput = validateOrderRegister(reqData);
     const response = await orderModel.createOrder(validInput);
-    return successResponse(200, response)
+    return successResponse(201, response, null, 'created')
   } catch (error) {
     console.error('error -> ', logStruct('createOrder', error))
     return errorResponse(error.status, error.message);
@@ -33,7 +33,7 @@ const updateOrder = async (reqData) => {
   try {
     const validInput = validateId(reqData);
     const response = await orderModel.updateOrder(validInput);
-    return successResponse(200, response)
+    return successResponse(204, null, null, 'updated')
   } catch (error) {
     console.error('error -> ', logStruct('updateOrder', error))
     return errorResponse(error.status, error.message);
@@ -46,7 +46,7 @@ const addToCart = async (reqData) => {
     let newOrder = await orderModel.fetchNewOrder(validInput.user_id);
 
     if (!newOrder || !newOrder.length) {
-      const response = await orderModel.createOrder(validInput);
+      await orderModel.createOrder(validInput);
       newOrder = await orderModel.fetchNewOrder(validInput.user_id);
     }
 
@@ -60,6 +60,7 @@ const addToCart = async (reqData) => {
         sub_total: validInput.sub_total + existing[0].sub_total
       });
     } else {
+      validInput.stage = 'cart';
       response = await orderModel.addToCart(validInput);
     }
 
@@ -70,7 +71,7 @@ const addToCart = async (reqData) => {
       sub_total: newOrder[0].sub_total + validInput.sub_total,
     });
 
-    return successResponse(200, response)
+    return successResponse(200, null)
   } catch (error) {
     console.error('error -> ', logStruct('addToCart', error))
     return errorResponse(error.status, error.message);
@@ -102,7 +103,15 @@ const fetchUserCart = async (reqData) => {
 const removeFromCart = async (reqData) => {
   try {
     const validInput = validateOrderRegister(reqData);
+    // console.log("remove from cart input", validInput)
+
     const product = await orderModel.getItemFromUsersCurrentCart(validInput.user_id, validInput.product_id);
+
+    // console.log("remove from cart product", product)
+
+    if (!product || !product.length) {
+      return errorResponse(520, "noItemInCart");
+    }
 
     const cartPayload = {
       id: product[0].id, 
@@ -117,7 +126,8 @@ const removeFromCart = async (reqData) => {
     }
 
     const order = await orderModel.fetchOrderById(product[0].order_id);
-    console.log("order --->", order);
+
+    // console.log("remove from cart order", order)
 
     const orderPayload = {
       id: order[0].id, 
@@ -127,7 +137,7 @@ const removeFromCart = async (reqData) => {
 
     await orderModel.updateOrder(orderPayload);
 
-    return successResponse(200, response)
+    return successResponse(204)
   } catch (error) {
     console.error('error -> ', logStruct('removeFromCart', error))
     return errorResponse(error.status, error.message);
@@ -138,7 +148,7 @@ const createShipment = async (reqData) => {
   try {
     const validInput = validateShipRegister(reqData);
     const response = await orderModel.createShipment(validInput);
-    return successResponse(200, response)
+    return successResponse(201, response, null, 'created')
   } catch (error) {
     console.error('error -> ', logStruct('createShipment', error))
     return errorResponse(error.status, error.message);
@@ -160,9 +170,20 @@ const updateUserShipment = async (reqData) => {
   try {
     const validInput = validateId(reqData);
     const response = await orderModel.updateShipment(validInput);
-    return successResponse(200, response)
+    return successResponse(204, response, null, 'updated')
   } catch (error) {
     console.error('error -> ', logStruct('updateUserShipment', error))
+    return errorResponse(error.status, error.message);
+  }
+};
+
+const createWarehouse = async (reqData) => {
+  try {
+    const validInput = validateWarehouse(reqData);
+    const response = await orderModel.createWarehouse(validInput);
+    return successResponse(201, response, null, 'created')
+  } catch (error) {
+    console.error('error -> ', logStruct('createWarehouse', error))
     return errorResponse(error.status, error.message);
   }
 };
@@ -180,5 +201,6 @@ module.exports = {
   createShipment,
   fetchUserShipment,
   updateUserShipment,
-  fetchActiveCartByUser
+  fetchActiveCartByUser,
+  createWarehouse
 }

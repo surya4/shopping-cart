@@ -6,63 +6,70 @@ const {authenticator, allowCustomer,
   allowAdmin, allowSeller} = require('../lib/common');
   
 // orders
-router.post('/order', authenticator, async (req, res) => {
-  const response = await ordersController.createOrder(req.body)
+router.post('/create', authenticator, async (req, res, next) => {
+  const response = await ordersController.createOrder(req.body);
   return res.status(response.status).send(response)
 })
 
-router.get('/order/:id', authenticator, async (req, res) => {
+router.get('/order/:id', authenticator, async (req, res, next) => {
   req.body.id = Number(req.params.id);
   const response = await ordersController.fetchOrder(req.body)
   return res.status(response.status).send(response)
 })
 
-router.put('/order/:id', authenticator, async (req, res) => {
+router.put('/order/:id', authenticator, async (req, res, next) => {
   req.body.id = Number(req.params.id);
   const response = await ordersController.updateOrder(req.body)
   return res.status(response.status).send(response)
 })
 
 // carts
-router.post('/addToCart', authenticator, allowCustomer, async (req, res) => {
+router.post('/addToCart', authenticator, allowCustomer, async (req, res, next) => {
   const response = await ordersController.addToCart(req.body)
   return res.status(response.status).send(response)
 })
 
-router.get('/activeCart/:id', authenticator, allowCustomer, async (req, res) => {
+router.get('/activeCart/:id', authenticator, allowCustomer, async (req, res, next) => {
   // user id
   req.body.id = Number(req.params.id);
   const response = await ordersController.fetchActiveCartByUser(req.body)
   return res.status(response.status).send(response)
 })
 
-router.get('/cart/:id', authenticator, allowCustomer, async (req, res) => {
+router.get('/cart/:id', authenticator, allowCustomer, async (req, res, next) => {
   // order id
   req.body.id = Number(req.params.id);
   const response = await ordersController.fetchUserCart(req.body)
   return res.status(response.status).send(response)
 })
 
-router.put('/removeFromCart', authenticator, allowCustomer, async (req, res) => {
-  const response = await ordersController.removeFromCart(req.body)
+router.delete('/removeFromCart', authenticator, allowCustomer, async (req, res, next) => {
+  const response = await ordersController.removeFromCart(req.body);
   return res.status(response.status).send(response)
 })
 
 // shipments
-router.post('/ship', authenticator, async (req, res) => {
+router.post('/ship', authenticator, async (req, res, next) => {
   const response = await ordersController.createShipment(req.body)
   return res.status(response.status).send(response)
 })
 
-router.get('/ship/:id', authenticator, async (req, res) => {
+router.get('/ship/:id', authenticator, async (req, res, next) => {
   req.body.id = Number(req.params.id);
   const response = await ordersController.fetchUserShipment(req.body)
   return res.status(response.status).send(response)
 })
 
-router.put('/ship/:id', authenticator, async (req, res) => {
+router.put('/ship/:id', authenticator, async (req, res, next) => {
   req.body.id = Number(req.params.id);
   const response = await ordersController.updateUserShipment(req.body)
   return res.status(response.status).send(response)
+});
+
+// warehouse
+router.post('/warehouse', authenticator, allowAdmin, async (req, res, next) => {
+  const response = await ordersController.createWarehouse(req.body)
+  return res.status(response.status).send(response)
 })
+
 module.exports = router;
