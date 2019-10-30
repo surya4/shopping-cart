@@ -13,7 +13,7 @@ describe('Orders', () => {
   let sellerCookie;
 
   describe('add or update order, shop or warehouse', () => {
-    // seller login
+    // customer login
     it('should sucess when admin user logged in', (done) => {
       const agent1 = chai.request(app);
       agent1.post('/shop/v1/user/login')
@@ -53,7 +53,7 @@ describe('Orders', () => {
     it('should sucess when customer logged in', (done) => {
       const agent1 = chai.request(app);
       agent1.post('/shop/v1/user/login')
-      .send({ user_name: "martinezprince@terrasys.com", password: "abcd"})
+      .send({ user_name: "barnettpacheco@terrasys.com", password: "abcd"})
       .end((err, res) => {
         expect(err).not.to.exist;
         adminCookie = res.headers['set-cookie'].pop().split('should ;')[0];
@@ -164,7 +164,7 @@ describe('Orders', () => {
   })
 
   describe('fetch items', () => {
-    // seller login
+    // customer login
     it('should sucess when user logges in', (done) => {
       const agent8 = chai.request(app);
       agent8.post('/shop/v1/user/login')
@@ -219,7 +219,7 @@ describe('Orders', () => {
     it('should sucess when user logges in', (done) => {
       const agent11 = chai.request(app);
       agent11.post('/shop/v1/user/login')
-      .send({ user_name: "martinezprince@terrasys.com", password: "abcd"})
+      .send({ user_name: "barnettpacheco@terrasys.com", password: "abcd"})
       .end((err, res) => {
         expect(err).not.to.exist;
         customerCookie = res.headers['set-cookie'].pop().split('should ;')[0];

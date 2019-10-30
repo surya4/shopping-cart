@@ -13,11 +13,11 @@ describe('Products', () => {
   let sellerCookie;
 
   describe('add new product category', () => {
-    // seller login
+    // admin login
     it('should sucess when user logges in', (done) => {
       const agent1 = chai.request(app);
       agent1.post('/shop/v1/user/login')
-      .send({ user_name: "martinezprince@terrasys.com", password: "abcd"})
+      .send({ user_name: "barnettpacheco@terrasys.com", password: "abcd"})
       .end((err, res) => {
         expect(err).not.to.exist;
         adminCookie = res.headers['set-cookie'].pop().split('should ;')[0];
@@ -49,7 +49,7 @@ describe('Products', () => {
     it('should sucess when user logges in', (done) => {
       const agent3 = chai.request(app);
       agent3.post('/shop/v1/user/login')
-      .send({ user_name: "martinezprince@terrasys.com", password: "abcd"})
+      .send({ user_name: "stuartvega@terrasys.com", password: "abcd"})
       .end((err, res) => {
         expect(err).not.to.exist;
         sellerCookie = res.headers['set-cookie'].pop().split('should ;')[0];

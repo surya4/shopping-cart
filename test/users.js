@@ -186,7 +186,7 @@ describe('Users', () => {
       .end((err, res) => {
         expect(err).not.to.exist;
         expect(res).to.have.status(401);
-        expect(res.body.message).to.be.equal('unauthorizedRequest');
+        expect(res.body.message).to.be.equal('wrongPassword');
         expect(res.body.success).to.be.equal(false);
         expect(res.body.data).not.to.exist;
         expect(res.body.meta).not.to.exist;
@@ -241,7 +241,7 @@ describe('Users', () => {
 
     it('should get sucess when admin user logges in', (done) => {
       agent3.post('/shop/v1/user/login')
-      .send({ user_name: "martinezprince@terrasys.com", password: "abcd"})
+      .send({ user_name: "barnettpacheco@terrasys.com", password: "abcd"})
       .end((err, res) => {
         expect(err).not.to.exist;
         adminCookie = res.headers['set-cookie'].pop().split('should ;')[0];

@@ -2,19 +2,21 @@ const chai = require('chai');
 const expect = chai.expect;
 const assert = chai.assert;
 
-describe('Linrary Functions', () => {
+describe('Library Functions', () => {
 
-  describe('check chache', () => {
+  describe('check cache', () => {
     const cache = require('../lib/cache')
     it('should set a value', (done) => {
       cache.set("test", "abcd", 300)
       .then(res => {
+        console.log("res set - ", res)
         expect(res).to.exist;
         expect(res).to.be.an('string');
         expect(res).to.be.equal('OK');
         done()
       })
       .catch(err => {
+        console.log("err", err)
         done(err);
       })
     })
@@ -22,12 +24,14 @@ describe('Linrary Functions', () => {
     it('should get value for key', (done) => {
       cache.get("test")
       .then(res => {
+        console.log("res get - ", res)
         expect(res).to.exist;
         expect(res).to.be.an('string');
         expect(res).to.be.equal('abcd');
         done()
       })
       .catch(err => {
+        console.log("err", err)
         done(err);
       })
     })
