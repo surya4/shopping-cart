@@ -25,18 +25,10 @@ router.get('/fetch/:id', authenticator, async (req, res) => {
   return res.status(response.status).send(response)
 });
 
-// to-do
-// router.put('/user/:id',  async (req, res) => {
-//   req.body.user_id = Number(req.params.id);
-//   const response = await userController.updateUser(req.body)
-//   return res.status(response.status).send(response)
-// });
-
 // authenticate
 router.post('/login', async (req, res) => {
   const response = await userController.loginUser(req.body);
   if (response.success && response.meta) {
-    console.log("in")
     req.session.email = response.meta.email;
     req.session.password = req.body.password;
     req.session.user_roles = response.meta.user_roles;
