@@ -19,7 +19,7 @@ describe('Products', () => {
       agent1.post('/shop/v1/user/login')
       .send({ user_name: "barnettpacheco@terrasys.com", password: "abcd"})
       .end((err, res) => {
-        console.log("product","1", res)
+        console.log("product","1", res.body)
         expect(err).not.to.exist;
         adminCookie = res.headers['set-cookie'].pop().split('should ;')[0];
         done()
@@ -32,7 +32,7 @@ describe('Products', () => {
       .set('Cookie', adminCookie)
       .send({'category': 'kitchen' })
       .end((err, res) => {
-        console.log("product","2", res)
+        console.log("product","2", res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(201);
         expect(res.body.message).to.be.equal('created');
@@ -53,7 +53,7 @@ describe('Products', () => {
       agent3.post('/shop/v1/user/login')
       .send({ user_name: "stuartvega@terrasys.com", password: "abcd"})
       .end((err, res) => {
-        console.log("product","3", res)
+        console.log("product","3", res.body)
         expect(err).not.to.exist;
         sellerCookie = res.headers['set-cookie'].pop().split('should ;')[0];
         done()
@@ -83,7 +83,7 @@ describe('Products', () => {
       .set('Cookie', sellerCookie)
       .send(item1)
       .end((err, res) => {
-        console.log("product","4", res)
+        console.log("product","4", res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(201);
         expect(res.body.message).to.be.equal('created');
@@ -105,7 +105,7 @@ describe('Products', () => {
       .set('Cookie', sellerCookie)
       .send(item2)
       .end((err, res) => {
-        console.log("product","5", res)
+        console.log("product","5", res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(400);
         expect(res.body.message).to.be.equal('nameMissing');
@@ -124,7 +124,7 @@ describe('Products', () => {
       agent6.put(`/shop/v1/product/readd/${1}`)
       .set('Cookie', sellerCookie)
       .end((err, res) => {
-        console.log("product","6", res)
+        console.log("product","6", res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(204);
         done()
@@ -136,7 +136,7 @@ describe('Products', () => {
       agent7.delete(`/shop/v1/product/item/${1}`)
       .set('Cookie', sellerCookie)
       .end((err, res) => {
-        console.log("product","7", res)
+        console.log("product","7", res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(204);
         done()
@@ -149,7 +149,7 @@ describe('Products', () => {
       .set('Cookie', sellerCookie)
       .send({name: "new name"})
       .end((err, res) => {
-        console.log("product","8", res)
+        console.log("product","8", res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(204);
         done()
@@ -161,7 +161,7 @@ describe('Products', () => {
       agent9.get(`/shop/v1/product/fetch/${1}`)
       .set('Cookie', sellerCookie)
       .end((err, res) => {
-        console.log("product","9", res)
+        console.log("product","9", res.body)
         expect(err).not.to.exist;
         expect(res).to.have.status(200);
         expect(res.body.message).to.be.equal('success');
