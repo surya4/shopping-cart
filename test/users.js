@@ -37,6 +37,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/register')
       .send(new_user1)
       .end((err, res) => {
+        console.log("user","1", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(201);
         expect(res.body.message).to.be.equal('userRegistered');
@@ -56,6 +57,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/register')
       .send(new_user2)
       .end((err, res) => {
+        console.log("user","2", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(403);
         expect(res.body.message).to.be.equal('userExists');
@@ -72,6 +74,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/register')
       .send(new_user3)
       .end((err, res) => {
+        console.log("user","3", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(401);
         expect(res.body.message).to.be.equal('shortPassword');
@@ -88,6 +91,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/register')
       .send(new_user4)
       .end((err, res) => {
+        console.log("user","4", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(400);
         expect(res.body.message).to.be.equal('nameMissing');
@@ -104,6 +108,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/register')
       .send(new_user5)
       .end((err, res) => {
+        console.log("user","5", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(401);
         expect(res.body.message).to.be.equal('invalidEmail');
@@ -120,6 +125,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/register')
       .send(new_user6)
       .end((err, res) => {
+        console.log("user","6", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(401);
         expect(res.body.message).to.be.equal('invalidPhone');
@@ -141,6 +147,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/login')
       .send(new_user1)
       .end((err, res) => {
+        console.log("user","7", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(200);
         expect(res.body.message).to.be.equal('success');
@@ -168,6 +175,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/login')
       .send(new_user2)
       .end((err, res) => {
+        console.log("user","8", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(400);
         expect(res.body.message).to.be.equal('user_nameMissing');
@@ -184,6 +192,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/login')
       .send(new_user3)
       .end((err, res) => {
+        console.log("user","9", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(401);
         expect(res.body.message).to.be.equal('wrongPassword');
@@ -204,6 +213,10 @@ describe('Users', () => {
       agent1.get(`/shop/v1/user/fetch/${userId}`)
       .set('Cookie', customerCookie)
       .end((err, res) => {
+        console.log("user","10", res)
+
+        console.log("1", res)
+
         expect(err).not.to.exist;
         expect(res).to.have.status(200);
         expect(res.body.message).to.be.equal('success');
@@ -224,6 +237,7 @@ describe('Users', () => {
       agent2.get(`/shop/v1/user/fetch/${userId}`)
       .set('Cookie', customerCookie)
       .end((err, res) => {
+        console.log("user","11", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(401);
         expect(res.body.message).to.be.equal('unauthorizedRequest');
@@ -243,6 +257,7 @@ describe('Users', () => {
       agent3.post('/shop/v1/user/login')
       .send({ user_name: "barnettpacheco@terrasys.com", password: "abcd"})
       .end((err, res) => {
+        console.log("user","12", res)
         expect(err).not.to.exist;
         adminCookie = res.headers['set-cookie'].pop().split('should ;')[0];
         done()
@@ -254,6 +269,7 @@ describe('Users', () => {
       .set('Cookie', adminCookie)
       .send({user_id: 1, role_id: 1})
       .end((err, res) => {
+        console.log("user","13", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(201);
         expect(res.body.message).to.be.equal('created');
@@ -274,6 +290,7 @@ describe('Users', () => {
       .set('Cookie', adminCookie)
       .send({"role": "admin"})
       .end((err, res) => {
+        console.log("user","14", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(201);
         expect(res.body.message).to.be.equal('created');
@@ -315,6 +332,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/seller')
       .send(user)
       .end((err, res) => {
+        console.log("user","15", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(201);
         expect(res.body.message).to.be.equal('created');
@@ -331,6 +349,7 @@ describe('Users', () => {
       chai.request(app).post('/shop/v1/user/seller')
       .send(user)
       .end((err, res) => {
+        console.log("user","16", res)
         expect(err).not.to.exist;
         expect(res).to.have.status(400);
         expect(res.body.message).to.be.equal('existingSeller');
